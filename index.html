@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR LOGIC IN JAVASCRIPT</title>
+    <style>
+        #result {
+            padding: 10px;
+            background-color: aqua;
+            margin: 10px auto;
+        }
+        .num-btn {
+            padding: 15px;
+            background-color: magenta;
+            margin: 10px auto;
+            text-align: center;
+        }
+        h1 {
+            background-color: crimson;
+            width: 32%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="background-color: chocolate;">
+    <h1>CALCULATOR APP</h1>
+
+    <input type="text" id="result" disabled>
+    <br />
+
+    <input type="button" class="num-btn" value="1" onclick="appendNumber(1)">
+    <input type="button" class="num-btn" value="2" onclick="appendNumber(2)">
+    <input type="button" class="num-btn" value="3" onclick="appendNumber(3)">
+    <input type="button" class="num-btn" value="+" onclick="appendOperator('+')">
+    <br>
+
+    <input type="button" class="num-btn" value="4" onclick="appendNumber(4)">
+    <input type="button" class="num-btn" value="5" onclick="appendNumber(5)">
+    <input type="button" class="num-btn" value="6" onclick="appendNumber(6)">
+    <input type="button" class="num-btn" value="*" onclick="appendOperator('*')">
+    <br>
+
+    <input type="button" class="num-btn" value="7" onclick="appendNumber(7)">
+    <input type="button" class="num-btn" value="8" onclick="appendNumber(8)">
+    <input type="button" class="num-btn" value="9" onclick="appendNumber(9)">
+    <input type="button" class="num-btn" value="-" onclick="appendOperator('-')">
+    <br>
+
+    <input type="button" class="num-btn" value="0" onclick="appendNumber(0)">
+    <input type="button" class="num-btn" value="=" onclick="calculate()">
+    <input type="button" class="num-btn" value="C" onclick="clearInput()">
+    <input type="button" class="num-btn" value="/" onclick="appendOperator('/')">
+    <br>
+
+    <input type="button" class="num-btn" value="Del" onclick="deleteLast()">
+    <input type="button" class="num-btn" value="." onclick="appendDecimal()">
+    <br>
+
+    <script>
+        let currentInput = '';
+
+        function appendNumber(number) {
+            currentInput += number;
+            updateResult();
+        }
+
+        function appendOperator(operator) {
+            currentInput += operator;
+            updateResult();
+        }
+
+        function appendDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                updateResult();
+            }
+        }
+
+        function calculate() {
+            try {
+                const result = eval(currentInput);
+                document.getElementById('result').value = result;
+                currentInput = result.toString();
+            } catch {
+                document.getElementById('result').value = 'Error';
+                currentInput = '';
+            }
+        }
+
+        function clearInput() {
+            currentInput = '';
+            updateResult();
+        }
+
+        function deleteLast() {
+            currentInput = currentInput.slice(0, -1);
+            updateResult();
+        }
+
+        function updateResult() {
+            document.getElementById('result').value = currentInput;
+        }
+    </script>
+</body>
+</html>
